@@ -1,0 +1,33 @@
+#include <stdio.h>
+#define INF 9999
+
+int main() {
+    int a[10][10],v[10]={0};
+    int n,i,j,e=0,min,x,y,cost=0;
+
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+        for(j=0;j<n;j++)
+            scanf("%d",&a[i][j]);
+
+    v[0]=1;
+
+    while(e<n-1) {
+        min=INF;
+
+        for(i=0;i<n;i++)
+            if(v[i])
+                for(j=0;j<n;j++)
+                    if(!v[j] && a[i][j] && a[i][j]<min)
+                        min=a[i][j],x=i,y=j;
+
+        printf("%d - %d = %d\n",x,y,min);
+        cost+=min;
+        v[y]=1;
+        e++;
+    }
+
+    printf("Cost = %d",cost);
+    return 0;
+}
